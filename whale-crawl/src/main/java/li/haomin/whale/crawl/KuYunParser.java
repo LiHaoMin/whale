@@ -40,6 +40,22 @@ public final class KuYunParser {
         return kuYunPages;
     }
 
+    public static void getDetail(String url) {
+        String htmlBody = httpGet(url == null ? URL : url);
+        Document document = Jsoup.parse(htmlBody, URL);
+        Element img = document.selectFirst("table .img img");
+        Element info = document.selectFirst("table table[cellspacing='1']");
+        Elements title = document.select("table .bt h1");
+        Element table = null;
+        for (Element element : title) {
+            if (element.text().contains("kkm3u8")) {
+                table = element.parent().selectFirst("table");
+            }
+        }
+
+        System.out.println(0);
+    }
+
     private static String httpGet(String url) {
         HttpResponse response = HttpUtil.createGet(url)
                 .setHttpProxy("127.0.0.1", 10809)
