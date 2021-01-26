@@ -17,6 +17,11 @@
             <artifactId>whale-common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>li.haomin</groupId>
+            <artifactId>whale-crawl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

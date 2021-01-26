@@ -1,11 +1,11 @@
 package li.haomin.whale.repository;
 
-import li.haomin.whale.model.User;
+import li.haomin.whale.model.Media;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface MediaRepository extends JpaRepository<Media, Long> {
 
-    Boolean existsByAddress(String xxx);
+    Media findFirstByName(String name);
 }
