@@ -9,12 +9,8 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: org.sqlite.JDBC
-    url: jdbc:sqlite:/opt/app/whale/whale.db
+    url: jdbc:sqlite:F:\Projects\whale\whale-api\whale.db
 
 logging:
   file:
-    path: /opt/app/whale
-
-server:
-  servlet:
-    context-path: /api
+    path: .
