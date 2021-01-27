@@ -88,15 +88,17 @@ public class ParserSchedule implements CommandLineRunner {
             mediaId = media.getId();
         }
 
-        List<MediaUri> mediaUris = detail.getCollections().stream().map(o -> {
-            MediaUri mediaUri = new MediaUri();
-            mediaUri.setMediaId(mediaId);
-            mediaUri.setTitle(o.getName());
-            mediaUri.setUrl(o.getUrl());
-            mediaUri.setCreateTime(now);
-            mediaUri.setUpdateTime(now);
-            return mediaUri;
-        }).collect(Collectors.toList());
-        mediaUriRepository.saveAll(mediaUris);
+        if (detail != null) {
+            List<MediaUri> mediaUris = detail.getCollections().stream().map(o -> {
+                MediaUri mediaUri = new MediaUri();
+                mediaUri.setMediaId(mediaId);
+                mediaUri.setTitle(o.getName());
+                mediaUri.setUrl(o.getUrl());
+                mediaUri.setCreateTime(now);
+                mediaUri.setUpdateTime(now);
+                return mediaUri;
+            }).collect(Collectors.toList());
+            mediaUriRepository.saveAll(mediaUris);
+        }
     }
 }
