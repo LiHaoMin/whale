@@ -23,6 +23,8 @@ import java.util.stream.Collectors;
 @Component
 public class ParserSchedule implements CommandLineRunner {
 
+    private String url;
+
     @Autowired
     private MediaRepository mediaRepository;
     @Autowired
@@ -32,20 +34,22 @@ public class ParserSchedule implements CommandLineRunner {
     public void run(String... args) throws Exception {
         long count = mediaRepository.count();
         log.info("count = " + count);
-        if (count > 0) return;
+        if (count > 0 && args.length == 0) return;
+        this.url = args[0];
         parser(true);
         log.info("run count " + mediaRepository.count());
     }
 
     @Scheduled(cron = "0 0 01 * * ?")
     public void everyDay() {
+        this.url = null;
         log.info("everyDay start");
         parser(false);
         log.info("everyDay end");
     }
 
     private void parser(boolean isAll) {
-        String url = null;
+        String url = this.url;
         DateTime now = DateUtil.date();
 
         do {
@@ -88,7 +92,7 @@ public class ParserSchedule implements CommandLineRunner {
             mediaId = media.getId();
         }
 
-        if (detail != null) {
+        if (detail.getCollections() != null) {
             List<MediaUri> mediaUris = detail.getCollections().stream().map(o -> {
                 MediaUri mediaUri = new MediaUri();
                 mediaUri.setMediaId(mediaId);
