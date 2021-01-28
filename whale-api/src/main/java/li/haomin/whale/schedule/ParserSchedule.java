@@ -40,7 +40,7 @@ public class ParserSchedule implements CommandLineRunner {
         log.info("run count " + mediaRepository.count());
     }
 
-    @Scheduled(cron = "0 0 01 * * ?")
+    @Scheduled(cron = "0 0 0/2 * * ? ")
     public void everyDay() {
         this.url = null;
         log.info("everyDay start");
